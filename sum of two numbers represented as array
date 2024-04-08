@@ -1,0 +1,60 @@
+#include<vector>
+class Solution{
+public:	
+
+    vector<int> reverse(vector<int> v){
+        int s=0;
+        int e=v.size()-1;
+        while(s<e){
+            swap(v[s],v[e]);
+            s++;
+            e--;
+        }
+        return v;
+    }
+    
+    vector<int> findSum(vector<int> &a, vector<int> &b) {
+        int i=a.size()-1; 
+        int j=b.size()-1; 
+        vector<int> v;
+        int carry=0;
+        while(i>=0 && j>=0){
+            int sum=a[i]+b[j]+carry;
+            carry=sum/10;
+            sum=sum%10;
+            v.push_back(sum);
+            i--;
+            j--;
+        }
+        //case1 when 1st array is bigger in size
+        while(i>=0){
+            int sum=a[i]+carry;
+            carry=sum/10;
+            sum=sum%10;
+            v.push_back(sum);
+            i--;
+        }
+        
+        //case2 when 1st array is smaller in size
+        while(j>=0){
+            int sum=b[j]+carry;
+            carry=sum/10;
+            sum=sum%10;
+            v.push_back(sum);
+            j--;
+        }
+        
+        //case3 when carry is being left
+        while(carry!=0){
+            int sum=carry;
+            carry=sum/10;
+            sum=sum%10;
+            v.push_back(sum);
+           
+        }
+        return reverse(v);
+    }
+
+
+
+};
